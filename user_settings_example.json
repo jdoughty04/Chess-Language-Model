@@ -1,0 +1,19 @@
+{
+    "engines": [
+        {
+            "path": "",
+            "name": ""
+        }
+    ],
+    "ai_models": {
+        "google": {
+            "api_key": ""
+        },
+        "openai": {
+            "api_key": ""
+        },
+        "anthropic": {
+            "api_key": ""
+        }
+    }
+}

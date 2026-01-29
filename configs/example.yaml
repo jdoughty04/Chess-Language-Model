@@ -1,0 +1,42 @@
+experiment_name: "cloud_engineered_v1"
+output_dir: "checkpoints"
+samples_dir: "data/preprocessed/samples"
+
+model:
+  base_model: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+  mode: "engineered"
+  engineered_features_type: "main"
+  
+  # Optimization
+  load_in_8bit: false
+  use_flash_attention: false
+  use_torch_compile: false
+  
+  # LoRA
+  lora:
+    r: 32
+    alpha: 64
+    dropout: 0.05
+    unfreeze_epoch: 1
+    progressive_merge: true
+    target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+
+training:
+  num_epochs: 100
+  batch_size: 32
+  gradient_accumulation_steps: 1
+  gradient_checkpointing: false
+  gradient_clip_val: null
+  learning_rate: 7e-4
+  warmup_ratio: 0.00138
+  max_length: 360
+  val_split: 0.1
+  
+  save_steps: 5000
+  logging_steps: 1
+  
+  fp16: false
+  bf16: true
+  
+  use_wandb: true
+  wandb_project: "chess-commentary-cloud_engineered_v0"
